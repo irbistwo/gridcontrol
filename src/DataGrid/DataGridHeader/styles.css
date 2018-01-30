@@ -1,0 +1,15 @@
+.data-grid__header {
+  background-color: #f3f3f3;
+}
+
+.data-grid__header .table__cell:hover {
+  background-color: #E0ECFF;
+}
+
+.data-grid__header .table {
+  border-bottom: none;
+}
+
+.data-grid__header .table__cell {
+  border-style: solid;
+}

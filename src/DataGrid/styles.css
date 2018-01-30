@@ -1,0 +1,7 @@
+.data-grid {
+  font: 12px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+  margin: auto;
+  min-width: 350px;
+  border: solid 1px #95B8E7;
+  width: 750px;
+}

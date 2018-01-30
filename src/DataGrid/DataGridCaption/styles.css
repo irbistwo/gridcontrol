@@ -1,0 +1,7 @@
+.data-grid__caption {
+  padding: 5px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #E0ECFF;
+  border-bottom: solid 1px #95B8E7;
+}

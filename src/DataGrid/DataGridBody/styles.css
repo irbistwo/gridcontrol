@@ -1,0 +1,14 @@
+.data-grid__body {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+
+.data-grid__body .table__row:hover {
+  background-color: #E0ECFF;
+}
+
+.data-grid__body .table__row_selected,
+.data-grid__body .table__row_selected:hover {
+  background-color: #ffe48d;
+}

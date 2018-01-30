@@ -1,0 +1,17 @@
+.table {
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+
+.table__row {
+  height: 25px;
+}
+
+.table__cell {
+  text-align: left;
+  font-weight: normal;
+  padding: 0 5px 0 5px;
+  border-width: 0 1px 1px 0;
+  border-style: dotted;
+  border-color: #ccc;
+}
