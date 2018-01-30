@@ -5,7 +5,7 @@ import './styles.css';
 class DataGridBody extends Component {
 
   prepareRowsData(rows) {
-    return rows.map(row => Object.values(row));
+    return rows.map(row => this.props.fields.map(field => row[field]));
   }
 
   render() {

@@ -7,22 +7,23 @@ import './styles.css';
 
 class DataGrid extends Component {
 
-  prepareColumnsData(columns, cssProperty) {
+  prepareColumnsData(columns, property) {
     return columns.reduce((result, column) => {
       return column.subColumns ?
           [
             ...result,
-            ...column.subColumns.map(subColumn => subColumn[cssProperty])
+            ...column.subColumns.map(subColumn => subColumn[property])
           ] :
           [
             ...result,
-            column[cssProperty]
+            column[property]
           ];
     }, []);
   }
 
   render() {
     const { data } = this.props;
+    const fields = this.prepareColumnsData(data.columns, 'field');
     const columnWidths = this.prepareColumnsData(data.columns, 'width');
     const columnAligns = this.prepareColumnsData(data.columns, 'align');
 
@@ -30,7 +31,7 @@ class DataGrid extends Component {
       <div className="data-grid">
         <DataGridCaption caption={data.caption} />
         <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />
-        <DataGridBody rows={data.rows} columnWidths={columnWidths} columnAligns={columnAligns} />
+        <DataGridBody rows={data.rows} fields={fields} columnWidths={columnWidths} columnAligns={columnAligns} />
         <DataGridFooter rows={data.footer} columnWidths={columnWidths} columnAligns={columnAligns} />
       </div>
     );

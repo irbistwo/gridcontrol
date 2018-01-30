@@ -7,30 +7,30 @@ const data = {
     caption: 'Basic DataGrid',
     columnLevels: 2,
     /*columns: [
-        { title: 'Item ID', width: '80' },
-        { title: 'Product', width: '100' },
-        { title: 'List Price', width: '80', align: 'right' },
-        { title: 'Unit Cost', width: '80', align: 'right' },
-        { title: 'Attribute', width: '250' },
-        { title: 'Status', width: '60', align: 'center' }
+        { field: 'id', title: 'Item ID', width: '80' },
+        { field: 'product', title: 'Product', width: '100' },
+        { field: 'listPrice', title: 'List Price', width: '80', align: 'right' },
+        { field: 'unitCost', title: 'Unit Cost', width: '80', align: 'right' },
+        { field: 'attribute', title: 'Attribute', width: '250' },
+        { field: 'status', title: 'Status', width: '60', align: 'center' }
     ],*/
     columns: [
-        { title: 'Item ID', width: '80' },
-        { title: 'Product', width: '100' },
+        { field: 'id', title: 'Item ID', width: '80' },
+        { field: 'product', title: 'Product', width: '100' },
         {
           title: 'Item Details',
           width: '450',
           align: 'center',
           subColumns: [
-            { title: 'List Price', width: '80', align: 'right' },
-            { title: 'Unit Cost', width: '80', align: 'right' },
-            { title: 'Attribute', width: '250' },
-            { title: 'Status', width: '60', align: 'center' }
+            { field: 'listPrice', title: 'List Price', width: '80', align: 'right' },
+            { field: 'unitCost', title: 'Unit Cost', width: '80', align: 'right' },
+            { field: 'attribute', title: 'Attribute', width: '250' },
+            { field: 'status', title: 'Status', width: '60', align: 'center' }
           ]
         }
     ],
     rows: [
-        { id: 'EST-1', product: 'FI-SW-01', listPrice: '36.5', unitCost: '10', attribute: 'Large', status: 'P' },
+        { id: 'EST-1', product: 'FI-SW-01', listPrice: '36.5', unitCost: '10', attribute: 'Large', status: 'P', hiddenProperty: 'hiddenValue' },
         { id: 'EST-10', product: 'K9-DL-01', listPrice: '18.5', unitCost: '12', attribute: 'Spotted Adult Female', status: 'P' },
         { id: 'EST-11', product: 'RP-SN-01', listPrice: '38.5', unitCost: '12', attribute: 'Venomless', status: 'P' },
         { id: 'EST-12', product: 'RP-SN-01', listPrice: '26.5', unitCost: '12', attribute: 'Rattleless', status: 'P' },
