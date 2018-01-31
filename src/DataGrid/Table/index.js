@@ -29,7 +29,7 @@ class Table extends Component {
       this.setState({
         selectedRowIndex: index
       }, () => {
-        this.$rows[index].scrollIntoView({ block: 'center' });
+        this.$rows[index].scrollIntoView();
       });
     }
   }
