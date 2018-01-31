@@ -8,6 +8,7 @@ class Table extends Component {
     this.state = {
       selectedRowIndex: -1
     };
+    this.$rows = [];
   }
 
   handleClick(event) {
@@ -18,7 +19,19 @@ class Table extends Component {
     const trElement = event.target.parentNode;
     this.setState({
       selectedRowIndex: [...trElement.parentNode.children].indexOf(trElement)
+    }, () => {
+      this.props.onRowClick(this.state.selectedRowIndex);
     });
+  }
+
+  selectRow(index) {
+    if (this.props.singleSelect) {
+      this.setState({
+        selectedRowIndex: index
+      }, () => {
+        this.$rows[index].scrollIntoView({ block: 'center' });
+      });
+    }
   }
 
   createCell(value, width, align, key, rowSpan, colSpan) {
@@ -72,14 +85,19 @@ class Table extends Component {
       const $cells = row.map((cell, j) => {
         return this.createCell(cell, columnWidths[j], columnAligns[j], j);
       });
-
       return (
-        <tr className={'table__row ' + (this.state.selectedRowIndex === i ? 'table__row_selected' : '')} key={i}>{$cells}</tr>
+        <tr
+          className={'table__row ' + (this.state.selectedRowIndex === i ? 'table__row_selected' : '')}
+          ref={(row) => { this.$rows[i] = row }}
+          key={i}
+        >
+          {$cells}
+        </tr>
       );
     });
 
     return (
-      <table className="table" onClick={this.props.singleSelect ? this.handleClick.bind(this) : null}>
+      <table className="table" onClick={this.props.singleSelect ? this.handleClick.bind(this) : null} onDoubleClick={this.handleClick.bind(this)}>
         <tbody>
           {$rows}
         </tbody>
@@ -87,9 +105,13 @@ class Table extends Component {
     );
   }
 
+  componentDidMount() {
+      this.selectRow(10);
+  }
+
   render() {
     return this.props.asTwoLeveledHeader ? this.createTwoLeveledHeader() : this.createTable();
   }
 }
 
-export default Table;
+export { Table };

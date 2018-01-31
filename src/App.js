@@ -30,7 +30,7 @@ const data = {
         }
     ],
     rows: [
-        { id: 'EST-1', product: 'FI-SW-01', listPrice: '36.5', unitCost: '10', attribute: 'Large', status: 'P', hiddenProperty: 'hiddenValue' },
+        { product: 'FI-SW-01', id: 'EST-1', listPrice: '36.5', unitCost: '10', attribute: 'Large', status: 'P', hiddenProperty: 'hiddenValue' },
         { id: 'EST-10', product: 'K9-DL-01', listPrice: '18.5', unitCost: '12', attribute: 'Spotted Adult Female', status: 'P' },
         { id: 'EST-11', product: 'RP-SN-01', listPrice: '38.5', unitCost: '12', attribute: 'Venomless', status: 'P' },
         { id: 'EST-12', product: 'RP-SN-01', listPrice: '26.5', unitCost: '12', attribute: 'Rattleless', status: 'P' },

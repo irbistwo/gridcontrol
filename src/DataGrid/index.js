@@ -15,7 +15,7 @@ class DataGrid extends Component {
     }
   }
 
-  updateData(data) {
+  setData(data) {
     if (data.rows) {
       this.setState({ rows: data.rows });
     }
@@ -26,7 +26,7 @@ class DataGrid extends Component {
   }
 
   handleUpdateDataButtonClick() {
-    this.updateData({
+    this.setData({
       rows: [...this.state.rows.slice(1), this.state.rows[0]],
       footer: [...this.state.footer.slice(1), this.state.footer[0]]
     });
