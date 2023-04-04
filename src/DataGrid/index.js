@@ -1,38 +1,44 @@
-import React, { Component } from 'react';
+import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffect} from "react";
 import DataGridCaption from './DataGridCaption';
 import DataGridHeader from './DataGridHeader';
 import DataGridBody from './DataGridBody';
 import DataGridFooter from './DataGridFooter';
-import './styles.css';
+//import './styles.css';
+import './dbgridreach.css';
+import {format1} from "../service/formatutils";
 
-class DataGrid extends Component {
+const DataGrid=(props)=> {
+const { data }=props;
+    const {caption}=props;
+    const {width,height}=data;
+   // const [data,setData]=useState(props.data);
 
-  constructor(props) {
+  //  useEffect(() => { setData(data) }, [data]);
+    useEffect(()=>{
+        /// console.log(data.rows.length);
+        console.log("comingdata",data.rows.length,data.rows);
+    })
+  /*constructor(props) {
+    console.log("comingdata",props.data.rows.length,props.data.rows);
     super(props);
     this.state = {
       rows: props.data.rows || [],
       footer: props.data.footer || []
     }
   }
+  */
 
-  setData(data) {
-    if (data.rows) {
-      this.setState({ rows: data.rows });
-    }
 
-    if (data.footer) {
-      this.setState({ footer: data.footer });
-    }
-  }
-
-  handleUpdateDataButtonClick() {
+/*
+ const handleUpdateDataButtonClick=()=> {
     this.setData({
       rows: [...this.state.rows.slice(1), this.state.rows[0]],
       footer: [...this.state.footer.slice(1), this.state.footer[0]]
     });
   }
+  */
 
-  prepareColumnsData(columns, property) {
+const  prepareColumnsData=(columns, property)=> {
     return columns.reduce((result, column) => {
       return column.subColumns ?
           [
@@ -46,22 +52,52 @@ class DataGrid extends Component {
     }, []);
   }
 
-  render() {
-    const { data } = this.props;
-    const fields = this.prepareColumnsData(data.columns, 'field');
-    const columnWidths = this.prepareColumnsData(data.columns, 'width');
-    const columnAligns = this.prepareColumnsData(data.columns, 'align');
+    const fields = prepareColumnsData(data.columns, 'field');
+    const columnWidths = prepareColumnsData(data.columns, 'width');
+    const columnAligns = prepareColumnsData(data.columns, 'align');
 
-    return [
-      <div className="data-grid">
+    const get_sum=(field)=> {
+       const sum=data.rows.reduce((s,row)=>s+parseFloat(row[field]),0);
+        //sum=number.toFixed(2);
+       return format1(sum," ");
+    }
+    const prepareFooterToArray=(footer)=>{
+      let  result=[];
+      if(!footer) return [];
+        footer.forEach((footeritem)=>{
+            let fieldtemp=new Array(fields.length);
+            fieldtemp.fill(" ");
+            fields.forEach((field,i)=>{
+
+              if(footeritem[field]) {fieldtemp[i]=footeritem[field];
+              if(fieldtemp[i]==="count") fieldtemp[i]=data.rows.length;
+              if(fieldtemp[i]==="sum") fieldtemp[i]=get_sum(field);
+              }
+
+          });
+            result.push(fieldtemp);
+      })
+        console.log("footer",result);
+        return result;
+    };
+
+  //  prepareFooterToArray(data.footer);
+    return (
+        <>
+            {/* <div>{caption}</div>*/}
+      <div className="data-grid"  style={{ width: width+"px"}}>
+          <div className="data-grid__view_scrollable">
         <DataGridCaption caption={data.caption} />
-        <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />
-        <DataGridBody rows={this.state.rows} fields={fields} columnWidths={columnWidths} columnAligns={columnAligns} />
-        <DataGridFooter rows={this.state.footer} columnWidths={columnWidths} columnAligns={columnAligns} />
-      </div>,
-      <input type="submit" value="Update data" onClick={this.handleUpdateDataButtonClick.bind(this)}/>
-    ];
-  }
+            <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />
+        <DataGridBody rows={data.rows} fields={fields} columnWidths={columnWidths} columnAligns={columnAligns} height={height}
+            metadata={data.metaData}
+            />
+        <DataGridFooter rows={prepareFooterToArray(data.footer)} columnWidths={columnWidths} columnAligns={columnAligns} />
+              </div>
+      </div>
+        </>
+    );
+
 }
 
 export default DataGrid;

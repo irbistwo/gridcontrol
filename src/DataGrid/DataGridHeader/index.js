@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from '../Table';
-import './styles.css';
+//import './styles.css';
 
 class DataGridHeader extends Component {
 

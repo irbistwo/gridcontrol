@@ -1,0 +1,131 @@
+.data-grid {
+  font: 12px "Helvetica Neue", Helvetica, Tahoma, sans-serif;
+  margin: auto;
+  min-width: 350px;
+  border: solid 1px #95B8E7;
+  overflow: hidden;
+  width: 750px;
+}
+
+.data-grid__view_frozen {
+  float: left;
+}
+
+.data-grid__resize-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  cursor: col-resize;
+}
+
+
+.data-grid__body .table__row_hovered {
+  background-color: #e0ecff;
+}
+
+.data-grid__body .table__row_selected,
+.data-grid__body .table__row_selected.table__row_hovered {
+  background-color: #ffe48d;
+}
+
+.data-grid__caption {
+  padding: 5px;
+  font-weight: bold;
+  text-align: left;
+  background-color: #E0ECFF;
+  border-bottom: solid 1px #95B8E7;
+}
+/*
+.data-grid__footer {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+*/
+
+.data-grid__view_frozen .data-grid__footer {
+  overflow-x: hidden;
+}
+
+.data-grid__footer .table__row {
+  background-color: #ffffe0;
+}
+
+.data-grid__footer .table__cell {
+  background-color: #ffffe0;
+}
+
+/* for scrolling purposes */
+/*
+.data-grid__footer .table__cell:last-child {
+  width: 17px;
+  padding: 0;
+  background-color: white;
+  border: unset;
+  cursor: auto;
+}
+*/
+.data-grid__header {
+  overflow: hidden;
+  background-color: #f3f3f3;
+  user-select: none;
+}
+
+.data-grid__header .table__cell:hover {
+  background-color: #E0ECFF;
+}
+
+.data-grid__header .table {
+  border-bottom: none;
+}
+
+.data-grid__header .table__cell {
+  border-style: solid;
+}
+
+/* for scrolling purposes */
+.data-grid__header .table__row:first-child .table__cell:last-child {
+  cursor: auto;
+  border: unset;
+}
+
+.data-grid__header .table__row:first-child .table__cell:last-child:hover {
+  background-color: unset;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.table__row {
+  height: 25px;
+}
+
+.table__cell {
+  text-align: left;
+  font-weight: normal;
+  padding: 0 5px 0 5px;
+  border-width: 0 1px 1px 0;
+  border-style: dotted;
+  border-color: #ccc;
+  position: relative;
+}
+
+.data-grid__body .table,
+.data-grid__footer .table {
+  table-layout: fixed;
+  width: min-content;
+}
+
+.data-grid__body .table__cell,
+.data-grid__header .table__cell,
+.data-grid__footer .table__cell {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}

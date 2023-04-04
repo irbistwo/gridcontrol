@@ -4,8 +4,21 @@
   cursor: pointer;
 }
 
+.data-grid__body .table, .data-grid__footer .table {
+  table-layout: fixed;
+  width: min-content;
+}
 .table__row {
   height: 25px;
+}
+
+.table__cell1 {
+  text-align: left;
+  font-weight: normal;
+  padding: 0 5px 0 5px;
+  border-width: 0 1px 1px 0;
+  border-style: dotted;
+  border-color: #ccc;
 }
 
 .table__cell {
@@ -15,4 +28,28 @@
   border-width: 0 1px 1px 0;
   border-style: dotted;
   border-color: #ccc;
+  position: relative;
+}
+td {
+  padding: 6px;
+  border: 1px solid #ccc;
+}
+
+tr {
+  border: 1px solid #ccc;
+}
+
+th {
+  background: rgba(142, 167, 200, 0.99);
+  color: black;
+  padding: 6px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  table-layout: fixed;
+  white-space:nowrap;
 }

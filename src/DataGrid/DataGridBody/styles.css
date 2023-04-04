@@ -1,5 +1,15 @@
 .data-grid__body {
-  height: 200px;
+  height: 300px;
+  overflow-y: scroll;
+
+
+}
+
+.data-grid__view_scrollable {
+  overflow: hidden;
+}
+
+.data-grid__view_scrollable .data-grid__body {
   overflow-y: scroll;
   overflow-x: auto;
 }
@@ -7,8 +17,17 @@
 .data-grid__body .table__row:hover {
   background-color: #E0ECFF;
 }
-
+/*
 .data-grid__body .table__row_selected,
 .data-grid__body .table__row_selected:hover {
   background-color: #ffe48d;
 }
+*/
+/*
+.data-grid__body .table__cell, .data-grid__header .table__cell, .data-grid__footer .table__cell {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+*/

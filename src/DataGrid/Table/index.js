@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles.css';
+//import './styles.css';
 
 class Table extends Component {
 
@@ -36,7 +36,7 @@ class Table extends Component {
 
   createCell(value, width, align, key, rowSpan, colSpan) {
     return (
-      <td
+      <th
         className="table__cell"
         style={{ width: width + 'px', textAlign: align }}
         key={key}
@@ -44,7 +44,7 @@ class Table extends Component {
         colSpan={colSpan}
         >
           {value}
-      </td>
+      </th>
     );
   }
 
@@ -64,16 +64,15 @@ class Table extends Component {
           return this.createCell(cell, columnWidths[j], columnAligns[j], j, 2);
         }
       });
-
       return $cells;
     });
-
+    console.log("firs",$secondRow);
     return (
       <table className="table">
-        <tbody>
-          <tr className="table__row" key={0}>{$firstRow}</tr>
+        <thead>
+          <tr className="table__row1" key={0}>{$firstRow}</tr>
           <tr className="table__row" key={1}>{$secondRow}</tr>
-        </tbody>
+        </thead>
       </table>
     );
   }
@@ -88,7 +87,7 @@ class Table extends Component {
       return (
         <tr
           className={'table__row ' + (this.state.selectedRowIndex === i ? 'table__row_selected' : '')}
-          ref={(row) => { this.$rows[i] = row }}
+           ref={(row) => { this.$rows[i] = row }}
           key={i}
         >
           {$cells}
@@ -112,6 +111,12 @@ class Table extends Component {
   render() {
     return this.props.asTwoLeveledHeader ? this.createTwoLeveledHeader() : this.createTable();
   }
+
+/*
+  render() {
+    return  this.createTable();
+  }
+  */
 }
 
 export { Table };
