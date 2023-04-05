@@ -2,6 +2,7 @@ import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffec
 import logo from './logo.svg';
 import './App.css';
 import DataGrid from './DataGrid';
+import {EmptyGrid} from "./DataGrid/EmptyGrid";
 
 const data0 = {
     caption: 'Basic DataGrid',
@@ -64,8 +65,10 @@ const data0 = {
     */
 };
 const App =()=>{
-    const [data, setData] = useState({...data0});
+   // const [data, setData] = useState({...data0});
+    const [data, setData] = useState({});
     const [caption, setCaption] = useState("One");
+    const [isLoaded, setIsLoaded] = useState(false);
 
   const  handleUpdateDataButtonClick= useCallback(()=> {
      // console.log("click",data.rows.length,data.rows);
@@ -86,13 +89,18 @@ const App =()=>{
 
     },[data,caption]);
 const get_data=()=>{
-    console.log("newdatarow",data.rows);
-    return data;
+   // console.log("newdatarow",data.rows);
+    if(isLoaded) return;
+    setTimeout(()=>{setData(data0);
+        setIsLoaded(true);
+        },3000);
+   // return data;
 }
+useEffect(()=>get_data());
     return (
       <div className="App">
 
-          <DataGrid data={data} caption={caption} id={"one"}/>
+          {isLoaded?  <DataGrid data={data} caption={caption} id={"one"}/>:<EmptyGrid/> }
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
       </div>
     );
