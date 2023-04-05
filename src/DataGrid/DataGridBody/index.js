@@ -6,7 +6,7 @@ import TableBody from "../Table/TableBody";
 const DataGridBody= (props)=> {
   const {rows, ...props0 } = props;
   const {height}=props;
-
+const {id}=props;
 const  prepareRowsData=(rows)=> {
     return rows.map(row => props.fields.map(field => row[field]));
   }
@@ -32,14 +32,18 @@ const get_RowsRaw=()=>{
     })
 
     function scrolHeader(){
-        const target = document.querySelector(".data-grid__body");
-        const elemsToSync = document.querySelector(".data-grid__header");
+        const gridbody=document.getElementById(id);
+        if(!(gridbody)) return;
+        const target = gridbody.querySelector(".data-grid__body");
+        const elemsToSync = gridbody.querySelector(".data-grid__header");
+        const elemsToSync2 = gridbody.querySelector(".data-grid__footer");
 
         target.addEventListener('scroll', (event) => {
 
 //console.log(target.scrollLeft);
 
             elemsToSync.style.marginLeft = -target.scrollLeft + 'px';
+            elemsToSync2.style.marginLeft = -target.scrollLeft + 'px';
 
 
         });
@@ -57,7 +61,7 @@ const  handleOnRowDoubleClick=(index)=> {
 
 
     return (
-      <div className="data-grid__body " style={{  height: height+"px" }}>
+      <div className="data-grid__body " style={{  height: height+"px" }} >
         <TableBody
           rows={rows}
           {...props0}

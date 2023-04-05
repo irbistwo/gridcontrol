@@ -86,11 +86,11 @@ const  prepareColumnsData=(columns, property)=> {
         <>
             {/* <div>{caption}</div>*/}
       <div className="data-grid"  style={{ width: width+"px"}}>
-          <div className="data-grid__view_scrollable">
+          <div className="data-grid__view_scrollable"  id={props.id}>
         <DataGridCaption caption={data.caption} />
             <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />
         <DataGridBody rows={data.rows} fields={fields} columnWidths={columnWidths} columnAligns={columnAligns} height={height}
-            metadata={data.metaData}
+            metadata={data.metaData}  id={props.id}
             />
         <DataGridFooter rows={prepareFooterToArray(data.footer)} columnWidths={columnWidths} columnAligns={columnAligns} />
               </div>

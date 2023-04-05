@@ -92,7 +92,7 @@ const get_data=()=>{
     return (
       <div className="App">
 
-          <DataGrid data={data} caption={caption}/>
+          <DataGrid data={data} caption={caption} id={"one"}/>
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
       </div>
     );
