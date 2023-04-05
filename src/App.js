@@ -2,14 +2,16 @@ import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffec
 import logo from './logo.svg';
 import './App.css';
 import DataGrid from './DataGrid';
-import {EmptyGrid} from "./DataGrid/EmptyGrid";
+import EmptyGrid from "./DataGrid/EmptyGrid";
+import {sendPostDataLocation} from "./service/serviceSend";
+import {guidsmall} from "./service/formatutils";
 
 const data0 = {
     caption: 'Basic DataGrid',
     width:800,
     height:300,
     columnLevels: 2,
-    columns1: [
+    columns2: [
         { field: 'id', title: 'Item ID', width: '80' },
         { field: 'product', title: 'Product', width: '100' },
         { field: 'listPrice', title: 'List Price', width: '120', align: 'right' },
@@ -17,7 +19,7 @@ const data0 = {
         { field: 'attribute', title: 'Attribute', width: '450' },
         { field: 'status', title: 'Status', width: '60', align: 'center' }
     ],
-    columns: [
+    columns1: [
         { field: 'id', title: 'Item ID', width: '80' },
         { field: 'product', title: 'Product', width: '100' },
         {
@@ -91,10 +93,45 @@ const App =()=>{
 const get_data=()=>{
    // console.log("newdatarow",data.rows);
     if(isLoaded) return;
-    setTimeout(()=>{setData(data0);
+   /* setTimeout(()=>{setData(data0);
         setIsLoaded(true);
         },3000);
+    */
    // return data;
+
+    let maptopost={};
+    let paramarray=[];
+    let wherearray=[];
+    let paramid={};
+    paramid.name="BARCODE";
+    paramid.t="string";
+    paramid.v="22";
+    paramarray.push(paramid);
+    maptopost.params=paramarray;
+    maptopost.where=wherearray;
+    maptopost.table="section";
+    maptopost.guid=guidsmall();
+    maptopost.task="view";
+    //console.log(maptopost);
+    sendPostDataLocation(maptopost,(error,result)=>{
+        if(error) throw error;
+        console.log(result);
+        let jsonres=JSON.parse(result);
+        jsonres.columns=  [
+            { field: 'SNAME', title: 'Кор Имя', width: '80' ,align:"left"},
+            { field: 'NAME', title: 'Наименование', width: '200' ,align:"left"},
+            { field: 'KOEFSHOP', title: 'Коэф', width: '100' ,align:"center"}
+        ];
+        jsonres.metaData=
+        {SNAME:"string",NAME:"string"};
+        console.log(jsonres);
+        setData(jsonres);
+        setIsLoaded(true);
+
+    });
+
+
+
 }
 useEffect(()=>get_data());
     return (
