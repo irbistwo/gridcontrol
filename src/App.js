@@ -5,6 +5,7 @@ import DataGrid from './DataGrid';
 import EmptyGrid from "./DataGrid/EmptyGrid";
 import {sendPostDataLocation} from "./service/serviceSend";
 import {guidsmall} from "./service/formatutils";
+import Modal from "./Modal/Modal";
 
 const data0 = {
     caption: 'Basic DataGrid',
@@ -19,7 +20,7 @@ const data0 = {
         { field: 'attribute', title: 'Attribute', width: '450' },
         { field: 'status', title: 'Status', width: '60', align: 'center' }
     ],
-    columns1: [
+    columns: [
         { field: 'id', title: 'Item ID', width: '80' },
         { field: 'product', title: 'Product', width: '100' },
         {
@@ -71,12 +72,17 @@ const App =()=>{
     const [data, setData] = useState({});
     const [caption, setCaption] = useState("One");
     const [isLoaded, setIsLoaded] = useState(false);
+    const [modalVisible, setmodalVisible] = useState(false);
 
+    const handleModal=(maptopost)=>{
+        setmodalVisible(false);
+    }
   const  handleUpdateDataButtonClick= useCallback(()=> {
      // console.log("click",data.rows.length,data.rows);
     const newdata={...data};
      // const newdata=data;
     newdata.rows=newdata.rows.slice(1);
+      setmodalVisible(true);
       //newdata.rows=[...data.rows.slice(1), data.rows[0]];
      // newdata.rows=[...newdata.rows.slice(1)];
       //setCaption(caption+"1");
@@ -90,6 +96,14 @@ const App =()=>{
       */
 
     },[data,caption]);
+    const get_data1=()=>{
+        if(isLoaded) return;
+         setTimeout(()=>{setData(data0);
+             setIsLoaded(true);
+             },1500);
+
+    };
+
 const get_data=()=>{
    // console.log("newdatarow",data.rows);
     if(isLoaded) return;
@@ -101,15 +115,17 @@ const get_data=()=>{
 
     let maptopost={};
     let paramarray=[];
-    let wherearray=[];
+   // let wherearray=[];
+    let wherearray=["name like :name||'%'"];
+
     let paramid={};
-    paramid.name="BARCODE";
+    paramid.name="NAME";
     paramid.t="string";
-    paramid.v="22";
+    paramid.v="К";
     paramarray.push(paramid);
     maptopost.params=paramarray;
     maptopost.where=wherearray;
-    maptopost.table="section";
+    maptopost.table="section";maptopost.sqlnumber=2;
     maptopost.guid=guidsmall();
     maptopost.task="view";
     //console.log(maptopost);
@@ -122,8 +138,9 @@ const get_data=()=>{
             { field: 'NAME', title: 'Наименование', width: '200' ,align:"left"},
             { field: 'KOEFSHOP', title: 'Коэф', width: '100' ,align:"center"}
         ];
-        jsonres.metaData=
+       /* jsonres.metaData=
         {SNAME:"string",NAME:"string"};
+        */
         console.log(jsonres);
         setData(jsonres);
         setIsLoaded(true);
@@ -139,6 +156,7 @@ useEffect(()=>get_data());
 
           {isLoaded?  <DataGrid data={data} caption={caption} id={"one"}/>:<EmptyGrid/> }
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
+          <Modal is_visible={modalVisible} handleModal={handleModal}/>
       </div>
     );
 
