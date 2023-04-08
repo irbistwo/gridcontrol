@@ -103,7 +103,26 @@ const App =()=>{
              },1500);
 
     };
+const prepareModalstyle=()=> {
+    const addstyle = (filename) => {
 
+    var styles = document.createElement('link');
+    styles.rel = 'stylesheet';
+    styles.type = 'text/css';
+    styles.media = 'screen';
+   // styles.href = '/css/cruid.css';
+        styles.href = filename;
+    document.getElementsByTagName('head')[0].appendChild(styles);
+}
+
+    addstyle("/css/dbgridreach.css");
+    addstyle("/css/viewgrid.css");
+//addstyle('/css/cruid.css');
+    addstyle("/css/style-jtag.css");
+    addstyle("/css/stylecombo.css");
+
+
+    }
 const get_data=()=>{
    // console.log("newdatarow",data.rows);
     if(isLoaded) return;
@@ -144,6 +163,7 @@ const get_data=()=>{
         console.log(jsonres);
         setData(jsonres);
         setIsLoaded(true);
+        prepareModalstyle();
 
     });
 
@@ -156,7 +176,7 @@ useEffect(()=>get_data());
 
           {isLoaded?  <DataGrid data={data} caption={caption} id={"one"}/>:<EmptyGrid/> }
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
-          <Modal is_visible={modalVisible} handleModal={handleModal}/>
+          <Modal is_visible={modalVisible} handleModal={handleModal} id={"goods"} rowid={50993}/>
       </div>
     );
 

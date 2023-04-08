@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&didsplay=swap');
+
+:root
+{
+  --bg-clr: #7e6ee1;
+  --text-clr: #000;
+  --primary-clr: #c2f2c6;
+  --secondary-clr: #e4fee7;
+  --white: #fff;
+}
+
+*{
+  #font-family: 'Roboto',sans-serif;
+  margin: 0.5;
+  padding: 0;
+  box-sizing:  border-box;
+  list-style: none;
+  user-select: none;
+}
+
+
+.select_wrap  .default_option li .option {
+  font-family: 'Roboto',sans-serif;
+  display: flex;
+  align-items: center;
+  background: yellow //var(--white);
+  padding: 5px 5px;
+  width: 90%;
+  height: 45px;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.5s ease;
+
+}
+
+
+
+.select_wrap .select_ul {
+  background: var(--white);
+  #background-color: antiquewhite;
+  border-radius: 10px;
+  width: 90%;
+  display: none;
+}
+
+.select_wrap .select_ul li .option{
+display: flex;
+align-items: center;
+padding: 10px 20px;
+padding-left: 5px;
+width: 100%;
+height:40px;
+position: relative;
+cursor: pointer;
+transition: 0.5s easy;
+
+
+}
+.iconload {
+  display: none;
+}
+.select_wrap li .option p ,
+.select_wrap li .option input{
+  width: 100%;
+  padding :4px;
+}
+
+.select_wrap .select_ul  li.keyselected {
+    background: var(--secondary-clr);
+    border-radius: 10px;
+}
+
+.select_wrap .select_ul li .option:hover{
+  background: var(--secondary-clr);
+  border-radius: 10px;
+
+}
+
+.select_wrap .select_ul li:first-child .option{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
+.select_wrap .select_ul li:last-child .option{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+
+.select_wrap .select_ul li .option .inpur {
+opacity: 1;
+position: absolute;
+top: 0;
+left: 0;
+display: none;
+
+}
+
+.select_wrap .select_ul li .option .checkmark{
+position: absolute;
+top: 50%;
+left: 20px;
+transform: translateY(-50%);
+width: 20px;
+height: 20px;
+border: 1px solid var(--primary-clr);
+transition: 0.5s easy;
+}
+
+
+.select_wrap  .default_option.active +.select_ul {
+  display: block;
+}
+
+.select_wrap  .default_option.active .option,
+.select_wrap  .default_option .option:hover{
+background: var(--primary-clr);
+#color: var(--white);
+
+}
+
+.select_wrap  .default_option.active .option .icon{
+  transform: rotate(180deg);
+}
+
+
+.select_wrap .select_ul li .option.active .Text{
+  color: var(--primary-clr);
+}
+
+
+.radiobuttoncol {
+display: flex;
+flex-direction: row;
+border-style: groove;
+}
+
+
+
+  .radiobutton {
+  display: flex;
+  flex-direction: row;
+  }
+
+  .radiogroup1 {
+  #display: block;
+  width: 20%;
+  }
+
+  .textarea {
+  width: 100%;
+  user-select: text;
+  #white-space: nowrap;
+  }

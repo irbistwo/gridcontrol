@@ -1,21 +1,31 @@
 import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffect} from "react";
 import "./modal.css";
+import './style-jtag.css';
+import './stylecombo.css';
+import './tabs.css';
+import {cruidShowPromise} from "./formodaljs/cruidpromise";
+import {guidsmall} from "../service/formatutils";
 const Modal =(props)=>{
-const{is_visible,handleModal}=props;
+const{id,rowid,is_visible,handleModal}=props;
 let style={};
 if(is_visible) style={display:"block"};
-    const  handleUpdateDataButtonClick=()=>{
-        const text=   document.getElementById("testtext");
-        console.log("value",text.value);
+    const  handleUpdateDataButtonClick=(e)=>{
+       // const text=   document.getElementById("testtext");
+        console.log("value",e);
         handleModal(null);
     }
 
     useEffect(()=>{
+        /*
      const cruid=   document.getElementById("cruidFirms");
       const modalcont=cruid.querySelector(".modal-body");
         modalcont.innerHTML='<input id="testtext" type="date"/>';
+        */
+        if(!is_visible) return;
+        const guid=guidsmall();
+        cruidShowPromise(id,rowid,2,null,guid);
     })
-    return (<div id="cruidFirms" className="modal" tabIndex="0" style={style}>
+    return (<div id={"cruid"+id} className="modal" tabIndex="0" style={style}>
         <div className="modal-content">
             <div className="modal-header">
                 <span className="close">×</span>
