@@ -2,7 +2,7 @@ import {sendPostDataLocation} from "../../service/serviceSend";
 import {inittabpanemodal} from "./tabpanemodal";
 import {loadRow, prepareArrayFromModal} from "./cruid";
 import {comboprepare} from "./combocontrol2";
-
+import {notif_error,notif} from "./notif";
 var twiceerror=null;
 export function cruidShowPromise(idcruid,id,vari,maptopost,guid) {
 return new Promise((resolve,reject)=> {

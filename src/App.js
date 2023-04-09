@@ -120,6 +120,7 @@ const prepareModalstyle=()=> {
 //addstyle('/css/cruid.css');
     addstyle("/css/style-jtag.css");
     addstyle("/css/stylecombo.css");
+    addstyle("/css/notif.css");
 
 
     }
