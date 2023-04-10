@@ -7,6 +7,7 @@ const DataGridBody= (props)=> {
   const {rows, ...props0 } = props;
   const {height}=props;
 const {id}=props;
+const{onClick,onDbClick}=props;
 const  prepareRowsData=(rows)=> {
     return rows.map(row => props.fields.map(field => row[field]));
   }
@@ -52,10 +53,12 @@ const get_RowsRaw=()=>{
 
 const  handleOnRowClick=(index)=> {
     console.log(rows[index]);
+    onClick(rows[index]);
   }
 
 const  handleOnRowDoubleClick=(index)=> {
     console.log(rows[index]);
+    onDbClick(rows[index])
   }
 
 

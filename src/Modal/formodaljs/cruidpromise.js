@@ -99,12 +99,7 @@ resolve();
 
 cancel.onclick = function() {
   modal.style.display = "none";
-  if(id!==null) {
-      let tablereg = document.getElementById(idcruid);
-      let tr=  tablereg.querySelector("tr[id='"+id+"']");
-//  tr.style.background="yellow";
-  if(tr!==null) tr.style.background="";
-  }
+
   resolve();
 }
 
@@ -156,14 +151,15 @@ return new Promise((resolve,reject)=> {
 
       let modal2 = document.getElementById("cruid"+idtable);
       modal2.style.display = "none";
-      let pagePagination=1;
-        let paginationdiv = document.getElementById(idtable+"tbpg");
-if(paginationdiv){
+     /* let pagePagination=1;
+       let paginationdiv = document.getElementById(idtable+"tbpg");
+
+        if(paginationdiv){
         let liactive=paginationdiv.querySelector("li.active");
         if(liactive) pagePagination=liactive.getAttribute("data-page");
-      }
-      if(resjson.execFunc===undefined)
-      dofilterone(idtable,pagePagination,id,"refresh"+guid);
+      }*/
+      if(resjson.execFunc===undefined);
+     // dofilterone(idtable,pagePagination,id,"refresh"+guid);
       else { resjson.guid=guid;resjson.idtable=idtable;resjson.sqlexec=sqlexec;
         resjson.pagePagination=pagePagination;resjson.id=id;
          executeFunctionByName(resjson.execFunc,window,resjson);}

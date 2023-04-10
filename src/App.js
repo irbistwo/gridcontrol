@@ -73,27 +73,20 @@ const App =()=>{
     const [caption, setCaption] = useState("One");
     const [isLoaded, setIsLoaded] = useState(false);
     const [modalVisible, setmodalVisible] = useState(false);
-
+    const [row,setRow]=useState({ID:0});
+    let exectype=2;
     const handleModal=(maptopost)=>{
         setmodalVisible(false);
     }
   const  handleUpdateDataButtonClick= useCallback(()=> {
      // console.log("click",data.rows.length,data.rows);
-    const newdata={...data};
+  /*  const newdata={...data};
      // const newdata=data;
     newdata.rows=newdata.rows.slice(1);
+    */
       setmodalVisible(true);
-      //newdata.rows=[...data.rows.slice(1), data.rows[0]];
-     // newdata.rows=[...newdata.rows.slice(1)];
-      //setCaption(caption+"1");
-    // console.log("newdatarow",newdata.rows);
-      setData(newdata);
-       /* setData({
-            rows: [...data0.rows.slice(1), data.rows[0]],
-            footer: [...data0.footer.slice(1), data.footer[0]],
 
-        });
-      */
+    //  setData(newdata);
 
     },[data,caption]);
     const get_data1=()=>{
@@ -162,6 +155,10 @@ const get_data=()=>{
         {SNAME:"string",NAME:"string"};
         */
         console.log(jsonres);
+        if(jsonres.rows.length>0) {
+           setRow(jsonres.rows[0]);
+
+        }
         setData(jsonres);
         setIsLoaded(true);
         prepareModalstyle();
@@ -172,12 +169,21 @@ const get_data=()=>{
 
 }
 useEffect(()=>get_data());
+const onClickRow=(row)=>{
+    //console.log("click",row);
+    setRow(row);
+}
+const onDbClickRow=(row)=>{
+   // console.log("dbclick",row);
+    setRow(row);
+    handleUpdateDataButtonClick();
+}
     return (
       <div className="App">
 
-          {isLoaded?  <DataGrid data={data} caption={caption} id={"one"}/>:<EmptyGrid/> }
+          {isLoaded?  <DataGrid data={data} caption={caption} id={"one"} onClick={onClickRow} onDbClick={onDbClickRow}/>:<EmptyGrid/> }
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
-          <Modal is_visible={modalVisible} handleModal={handleModal} id={"goods"} rowid={50993}/>
+          <Modal is_visible={modalVisible} handleModal={handleModal} id={"goods"} rowid={row.ID} exectype={exectype}/>
       </div>
     );
 

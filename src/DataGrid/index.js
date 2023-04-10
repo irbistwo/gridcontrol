@@ -10,33 +10,16 @@ import {format1} from "../service/formatutils";
 const DataGrid=(props)=> {
 const { data }=props;
     const {caption}=props;
+    const{onClick,onDbClick}=props;
     const {width,height}=data;
    // const [data,setData]=useState(props.data);
 
   //  useEffect(() => { setData(data) }, [data]);
     useEffect(()=>{
         /// console.log(data.rows.length);
-        console.log("comingdata",data.rows.length,data.rows);
+       // console.log("comingdata",data.rows.length,data.rows);
     })
-  /*constructor(props) {
-    console.log("comingdata",props.data.rows.length,props.data.rows);
-    super(props);
-    this.state = {
-      rows: props.data.rows || [],
-      footer: props.data.footer || []
-    }
-  }
-  */
 
-
-/*
- const handleUpdateDataButtonClick=()=> {
-    this.setData({
-      rows: [...this.state.rows.slice(1), this.state.rows[0]],
-      footer: [...this.state.footer.slice(1), this.state.footer[0]]
-    });
-  }
-  */
 
 const  prepareColumnsData=(columns, property)=> {
     return columns.reduce((result, column) => {
@@ -90,7 +73,7 @@ const  prepareColumnsData=(columns, property)=> {
         <DataGridCaption caption={data.caption} />
             <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />
         <DataGridBody rows={data.rows} fields={fields} columnWidths={columnWidths} columnAligns={columnAligns} height={height}
-            metadata={data.metaData}  id={props.id}
+            metadata={data.metaData}  id={props.id} onClick={onClick} onDbClick={onDbClick}
             />
         <DataGridFooter rows={prepareFooterToArray(data.footer)} columnWidths={columnWidths} columnAligns={columnAligns} />
               </div>

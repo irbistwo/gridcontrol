@@ -6,7 +6,7 @@ import "./modal.css";
 import {cruidShowPromise} from "./formodaljs/cruidpromise";
 import {guidsmall} from "../service/formatutils";
 const Modal =(props)=>{
-const{id,rowid,is_visible,handleModal}=props;
+const{id,rowid,is_visible,handleModal,exectype}=props;
 let style={};
 if(is_visible) style={display:"block"};
     const  handleUpdateDataButtonClick=(e)=>{
@@ -28,8 +28,9 @@ if(is_visible) style={display:"block"};
 
     const crudShow=async ()=>{
         const guid=guidsmall();
-        await  cruidShowPromise(id,rowid,2,null,guid);
+        await  cruidShowPromise(id,rowid,exectype,null,guid);
         console.log("crudShowended");
+        handleModal(null);
     }
     return (<div id={"cruid"+id} className="modal" tabIndex="0" style={style}>
         <div className="modal-content">

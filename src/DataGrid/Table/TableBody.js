@@ -6,7 +6,6 @@ const TаbleBody=(props)=>{
     const {  columnWidths, columnAligns } = props;
     const {  fields,metadata } = props;
     const {rows}=props;
-    console.log("metada",metadata);
 const [singleSelect]=useState(true);
 const [selectedRowIndex,setselectedRowIndex]=useState(0);
 
@@ -18,10 +17,11 @@ const [selectedRowIndex,setselectedRowIndex]=useState(0);
         const trElement = event.target.parentNode;
         const ind=[...trElement.parentNode.children].indexOf(trElement);
        setselectedRowIndex(ind);
-    props.onRowClick(ind);
+
+   if(event.type==="dblclick")  props.onRowDoubleClick(ind);
+   if(event.type==="click")     props.onRowClick(ind);
 
     }
-
     const $rows = rows.map((row, i) => {
         //console.log("row",row);
         const $cells = fields.map((field, j) => {
