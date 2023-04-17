@@ -74,9 +74,25 @@ const App =()=>{
     const [isLoaded, setIsLoaded] = useState(false);
     const [modalVisible, setmodalVisible] = useState(false);
     const [row,setRow]=useState({ID:0});
+    const [selectedIndex,setselectedIndex]=useState(0);
     let exectype=2;
     const handleModal=(maptopost)=>{
+        setIsLoaded(false);
         setmodalVisible(false);
+
+      //  const i=locate(row.ID);
+        //setselectedIndex(i);
+      //  get_data();
+
+
+    }
+    const locate=(rows,id)=>{
+let i=0;
+rows.some((row,index) => {
+    console.log("rowLocate",row,row.ID===id);
+    if(row.ID===id){i=index; return true;}
+        });
+        return i;
     }
   const  handleUpdateDataButtonClick= useCallback(()=> {
      // console.log("click",data.rows.length,data.rows);
@@ -89,13 +105,8 @@ const App =()=>{
     //  setData(newdata);
 
     },[data,caption]);
-    const get_data1=()=>{
-        if(isLoaded) return;
-         setTimeout(()=>{setData(data0);
-             setIsLoaded(true);
-             },1500);
+    useEffect(()=>{prepareModalstyle()});
 
-    };
 const prepareModalstyle=()=> {
     const addstyle = (filename) => {
 
@@ -117,15 +128,13 @@ const prepareModalstyle=()=> {
 
 
     }
-const get_data=()=>{
+
+
+ const get_data=()=>{
    // console.log("newdatarow",data.rows);
     if(isLoaded) return;
-   /* setTimeout(()=>{setData(data0);
-        setIsLoaded(true);
-        },3000);
-    */
-   // return data;
-
+ const id=row.ID;
+let selindex=0
     let maptopost={};
     let paramarray=[];
    // let wherearray=[];
@@ -144,7 +153,7 @@ const get_data=()=>{
     //console.log(maptopost);
     sendPostDataLocation(maptopost,(error,result)=>{
         if(error) throw error;
-        console.log(result);
+      //  console.log(result);
         let jsonres=JSON.parse(result);
         jsonres.columns=  [
             { field: 'SNAME', title: 'Кор Имя', width: '80' ,align:"left"},
@@ -156,12 +165,14 @@ const get_data=()=>{
         */
         console.log(jsonres);
         if(jsonres.rows.length>0) {
-           setRow(jsonres.rows[0]);
+            if(id!==0) selindex=locate(jsonres.rows,id);
+           setRow(jsonres.rows[selindex]);
 
         }
         setData(jsonres);
         setIsLoaded(true);
-        prepareModalstyle();
+        setselectedIndex(selindex);
+        //prepareModalstyle();
 
     });
 
@@ -181,7 +192,7 @@ const onDbClickRow=(row)=>{
     return (
       <div className="App">
 
-          {isLoaded?  <DataGrid data={data} caption={caption} id={"one"} onClick={onClickRow} onDbClick={onDbClickRow}/>:<EmptyGrid/> }
+          {isLoaded?  <DataGrid data={data} caption={caption} id={"one"} onClick={onClickRow} onDbClick={onDbClickRow} selectedIndex={selectedIndex}/>:<EmptyGrid/> }
            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
           <Modal is_visible={modalVisible} handleModal={handleModal} id={"goods"} rowid={row.ID} exectype={exectype}/>
       </div>

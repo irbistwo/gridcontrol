@@ -31,4 +31,4 @@ class DataGridHeader extends Component {
   }
 }
 
-export default DataGridHeader;
+export default React.memo(DataGridHeader);

@@ -7,7 +7,8 @@ const TаbleBody=(props)=>{
     const {  fields,metadata } = props;
     const {rows}=props;
 const [singleSelect]=useState(true);
-const [selectedRowIndex,setselectedRowIndex]=useState(0);
+const{selectedIndex}=props;//For locate and highlight after reload data
+const [selectedRowIndex,setselectedRowIndex]=useState(selectedIndex);
 
   const  handleClick=(event)=> {
         if (event.target.tagName !== 'TD') {
