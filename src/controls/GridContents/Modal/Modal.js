@@ -4,7 +4,7 @@ import "./modal.css";
 //import './stylecombo.css';
 //import './tabs.css';
 import {cruidShowPromise} from "./formodaljs/cruidpromise";
-import {guidsmall} from "../service/formatutils";
+import {guidsmall} from "../../../service/formatutils";
 const Modal =(props)=>{
 const{id,rowid,is_visible,handleModal,exectype}=props;
 let style={};

@@ -1,6 +1,6 @@
 import React from 'react';
 import resizeHelper from '../resizeHelper.js';
-import {format1} from "../../service/formatutils";
+import {format1} from "../../../../service/formatutils";
 
 const TableCell = ({ value, field, width, align,metadata,  rowSpan, colSpan, resizeEnabled, onResizeStart }) => {
 let value0=value;

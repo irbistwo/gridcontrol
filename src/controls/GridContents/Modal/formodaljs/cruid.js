@@ -1,4 +1,4 @@
-import {sendPostDataLocation} from "../../service/serviceSend";
+import {sendPostDataLocation} from "../../../../service/serviceSend";
 import {inittabpanemodal} from "./tabpanemodal";
 import {notif_error,notif} from "./notif";
 var twiceerror=null;

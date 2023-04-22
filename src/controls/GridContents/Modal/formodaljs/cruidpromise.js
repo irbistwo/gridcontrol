@@ -1,4 +1,4 @@
-import {sendPostDataLocation} from "../../service/serviceSend";
+import {sendPostDataLocation} from "../../../../service/serviceSend";
 import {inittabpanemodal} from "./tabpanemodal";
 import {loadRow, prepareArrayFromModal} from "./cruid";
 import {comboprepare} from "./combocontrol2";

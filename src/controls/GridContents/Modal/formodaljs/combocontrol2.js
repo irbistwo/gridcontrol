@@ -1,4 +1,4 @@
-import {sendPostDataLocation} from "../../service/serviceSend";
+import {sendPostDataLocation} from "../../../../service/serviceSend";
 export function comboprepare(idregion){
 var combocontrol=null;
 if(idregion) {
