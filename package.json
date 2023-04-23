@@ -4,8 +4,8 @@
   "private": true,
   "proxy": "https://localhost:8080",
   "devDependencies": {
+    "@types/react": "^18.0.38",
     "react-scripts": "^5.0.1"
-
   },
   "dependencies": {
     "react": "^18.2.0",

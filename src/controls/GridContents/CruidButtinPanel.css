@@ -1,0 +1,84 @@
+.datagrid-toolbar {
+    height: auto;
+    padding: 1px 2px;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    display: flex;
+}
+
+.l-btn {
+    text-decoration: none;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.l-btn-plain {
+    background: transparent;
+    border-width: 0;
+    filter: none;
+}
+
+.l-btn-left {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+}
+.l-btn-icon-left .l-btn-text {
+    margin: 0 6px 0 26px;
+}
+
+.l-btn-text {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    line-height: 28px;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 6px;
+}
+
+.l-btn-icon-left .l-btn-icon {
+    left: 6px;
+}
+
+.icon-add {
+    background: url('../../assets/edit_add.png') no-repeat center center;
+}
+
+
+.icon-cut {
+    background: url('../../assets/cut.png') no-repeat center center;
+}
+
+.icon-save {
+    background: url('../../assets/filesave.png') no-repeat center center;
+}
+
+.datagrid-btn-separator {
+    float: left;
+    height: 24px;
+    border-left: 1px solid #dfdfdf;
+    border-right: 1px solid #fff;
+    margin: 2px 1px;
+}
+
+.l-btn-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    font-size: 1px;
+}

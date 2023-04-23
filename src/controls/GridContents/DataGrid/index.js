@@ -6,6 +6,8 @@ import DataGridFooter from './DataGridFooter';
 //import './styles.css';
 import './dbgridreach.css';
 import {format1} from "../../../service/formatutils";
+import CruidButtinPanel from "../CruidButtinPanel.tsx";
+
 
 const DataGrid=(props)=> {
 const { data }=props;
@@ -70,6 +72,7 @@ const  prepareColumnsData=(columns, property)=> {
         <>
             {/* <div>{caption}</div>*/}
       <div className="data-grid"  style={{ width: width+"px"}}>
+          <CruidButtinPanel/>
           <div className="data-grid__view_scrollable"  id={props.id}>
         <DataGridCaption caption={caption} />
             <DataGridHeader columns={data.columns} columnLevels={data.columnLevels} />

@@ -4,8 +4,10 @@ import Modal from './Modal/Modal';
 import EmptyGrid from "./DataGrid/EmptyGrid";
 import {sendPostDataLocation} from "../../service/serviceSend";
 import {guidsmall} from "../../service/formatutils";
+import CruidButtinPanel from "./CruidButtinPanel.tsx";
 
-const GridContents =(props)=> {
+
+const GridContents =(props:any)=> {
     const idtable=props.id;
     // const [data, setData] = useState({...data0});
     const [data, setData] = useState({});
@@ -15,7 +17,7 @@ const GridContents =(props)=> {
     const [row,setRow]=useState({ID:0});
     const [selectedIndex,setselectedIndex]=useState(0);
     let exectype=2;
-    const handleModal=(maptopost)=>{
+    const handleModal=(maptopost:any)=>{
         setIsLoaded(false);
         setmodalVisible(false);
 
@@ -25,9 +27,9 @@ const GridContents =(props)=> {
 
 
     }
-    const locate=(rows,id)=>{
+    const locate=(rows:any,id:number)=>{
         let i=0;
-        rows.some((row,index) => {
+        rows.some((row: { ID: number; }, index: number) => {
             console.log("rowLocate",row,row.ID===id);
             if(row.ID===id){i=index; return true;}
         });
@@ -47,7 +49,7 @@ const GridContents =(props)=> {
     useEffect(()=>{prepareModalstyle()});
 
     const prepareModalstyle=()=> {
-        const addstyle = (filename) => {
+        const addstyle = (filename: string) => {
 
             var styles = document.createElement('link');
             styles.rel = 'stylesheet';
@@ -119,11 +121,11 @@ const GridContents =(props)=> {
 
     }
     useEffect(()=>get_data());
-    const onClickRow=(row)=>{
+    const onClickRow=(row:any)=>{
         //console.log("click",row);
         setRow(row);
     }
-    const onDbClickRow=(row)=>{
+    const onDbClickRow=(row:any)=>{
         // console.log("dbclick",row);
         setRow(row);
         handleUpdateDataButtonClick();
