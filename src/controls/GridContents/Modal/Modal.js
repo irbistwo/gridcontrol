@@ -28,7 +28,9 @@ if(is_visible) style={display:"block"};
 
     const crudShow=async ()=>{
         const guid=guidsmall();
-        await  cruidShowPromise(id,rowid,exectype,null,guid);
+        let RowId=rowid;
+        if(exectype===0) RowId=0;
+        await  cruidShowPromise(id,RowId,exectype,null,guid);
         /*var modal = document.getElementById("cruid"+id);
         modal.parentNode.removeChild(modal);
         */

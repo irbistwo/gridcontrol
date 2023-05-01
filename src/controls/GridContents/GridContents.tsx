@@ -1,10 +1,11 @@
 import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffect} from "react";
 import DataGrid from "./DataGrid";
 import Modal from './Modal/Modal';
+import ModalFilter from './Modal/ModalFilter';
 import EmptyGrid from "./DataGrid/EmptyGrid";
 import {sendPostDataLocation} from "../../service/serviceSend";
 import {guidsmall} from "../../service/formatutils";
-import CruidButtinPanel from "./CruidButtinPanel.tsx";
+//import CruidButtinPanel from "./CruidButtinPanel.tsx";
 
 
 const GridContents =(props:any)=> {
@@ -14,6 +15,7 @@ const GridContents =(props:any)=> {
     const [caption, setCaption] = useState(props.caption);
     const [isLoaded, setIsLoaded] = useState(false);
     const [modalVisible, setmodalVisible] = useState(false);
+    const [filterVisible, setfilterVisible] = useState(false);
     const [row,setRow]=useState({ID:0});
     const [selectedIndex,setselectedIndex]=useState(0);
    const[exectype,setExectype]=useState(2);
@@ -21,6 +23,17 @@ const GridContents =(props:any)=> {
         setIsLoaded(false);
         setmodalVisible(false);
 
+        //  const i=locate(row.ID);
+        //setselectedIndex(i);
+        //  get_data();
+
+
+    }
+
+    const handleFilterModal=(maptopost:any)=>{
+       // setIsLoaded(false);
+        setfilterVisible(false);
+console.log("handleFilterModal",maptopost);
         //  const i=locate(row.ID);
         //setselectedIndex(i);
         //  get_data();
@@ -51,7 +64,13 @@ const GridContents =(props:any)=> {
     }
     const onAdd=()=>{
         setExectype(0);
+       // setRow({ID:0});
         setmodalVisible(true);
+    }
+
+    const onFilter=()=>{
+
+        setfilterVisible(true);
     }
     useEffect(()=>{prepareModalstyle()});
 
@@ -143,12 +162,14 @@ const GridContents =(props:any)=> {
         <div className="App">
 
             {isLoaded?  <DataGrid data={data} caption={caption} id={idtable} onClick={onClickRow}
-            onUpdate={onUpdate} onAdd={onAdd} onDbClick={onDbClickRow} selectedIndex={selectedIndex}
+            onUpdate={onUpdate} onAdd={onAdd} onFilter={onFilter} onDbClick={onDbClickRow} selectedIndex={selectedIndex}
             />:<EmptyGrid/> }
             {/*<input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/> */}
           <div id={"separatorReactNode"}></div>
 
             <Modal is_visible={modalVisible} handleModal={handleModal} id={idtable} rowid={row.ID} exectype={exectype}/>
+            <div id={"separatorReactNode"}></div>
+            <ModalFilter is_visible={filterVisible} handleModal={handleFilterModal} id={idtable} />
         </div>
     );
 

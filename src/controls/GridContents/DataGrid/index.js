@@ -12,7 +12,7 @@ import CruidButtinPanel from "../CruidButtinPanel.tsx";
 const DataGrid=(props)=> {
 const { data }=props;
     const {caption}=props;
-    const{onClick,onDbClick,onUpdate,onAdd}=props;
+    const{onClick,onDbClick,onUpdate,onAdd,onFilter}=props;
     const {width,height}=data;
     const {selectedIndex}=props;
    // const [data,setData]=useState(props.data);
@@ -70,9 +70,6 @@ const  prepareColumnsData=(columns, property)=> {
 
 
 
-    const onFilter=()=>{
-        console.log("datagrid/index71 filter click");
-    }
 
   //  prepareFooterToArray(data.footer);
     return (

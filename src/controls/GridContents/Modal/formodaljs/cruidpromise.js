@@ -147,7 +147,7 @@ return new Promise((resolve,reject)=> {
       notif_error(resjson.Error);
       return;
     }
-    let table = document.getElementById(idtable);
+  //  let table = document.getElementById(idtable);
 
       let modal2 = document.getElementById("cruid"+idtable);
       modal2.style.display = "none";
