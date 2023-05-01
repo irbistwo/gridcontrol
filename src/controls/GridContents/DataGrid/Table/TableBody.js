@@ -56,6 +56,10 @@ const [selectedRowIndex,setselectedRowIndex]=useState(selectedIndex);
         );
     });
 
+  useEffect(()=>{
+      const elselect=document.querySelector(".table__row_selected");
+      elselect.scrollIntoView();
+  },[selectedIndex])
 return (
         <table className="table" onClick={singleSelect ? handleClick : null} onDoubleClick={handleClick}>
             <tbody>

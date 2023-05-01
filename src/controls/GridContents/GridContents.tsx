@@ -16,7 +16,7 @@ const GridContents =(props:any)=> {
     const [modalVisible, setmodalVisible] = useState(false);
     const [row,setRow]=useState({ID:0});
     const [selectedIndex,setselectedIndex]=useState(0);
-    let exectype=2;
+   const[exectype,setExectype]=useState(2);
     const handleModal=(maptopost:any)=>{
         setIsLoaded(false);
         setmodalVisible(false);
@@ -30,7 +30,6 @@ const GridContents =(props:any)=> {
     const locate=(rows:any,id:number)=>{
         let i=0;
         rows.some((row: { ID: number; }, index: number) => {
-            console.log("rowLocate",row,row.ID===id);
             if(row.ID===id){i=index; return true;}
         });
         return i;
@@ -46,6 +45,14 @@ const GridContents =(props:any)=> {
         //  setData(newdata);
 
     },[data,caption]);
+    const onUpdate=()=>{
+        setExectype(2);
+        setmodalVisible(true);
+    }
+    const onAdd=()=>{
+        setExectype(0);
+        setmodalVisible(true);
+    }
     useEffect(()=>{prepareModalstyle()});
 
     const prepareModalstyle=()=> {
@@ -128,13 +135,19 @@ const GridContents =(props:any)=> {
     const onDbClickRow=(row:any)=>{
         // console.log("dbclick",row);
         setRow(row);
+      //  setExectype(2);
+        onUpdate();
         handleUpdateDataButtonClick();
     }
     return (
         <div className="App">
 
-            {isLoaded?  <DataGrid data={data} caption={caption} id={idtable} onClick={onClickRow} onDbClick={onDbClickRow} selectedIndex={selectedIndex}/>:<EmptyGrid/> }
-            <input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/>
+            {isLoaded?  <DataGrid data={data} caption={caption} id={idtable} onClick={onClickRow}
+            onUpdate={onUpdate} onAdd={onAdd} onDbClick={onDbClickRow} selectedIndex={selectedIndex}
+            />:<EmptyGrid/> }
+            {/*<input type="button" value="Update data" onClick={handleUpdateDataButtonClick}/> */}
+          <div id={"separatorReactNode"}></div>
+
             <Modal is_visible={modalVisible} handleModal={handleModal} id={idtable} rowid={row.ID} exectype={exectype}/>
         </div>
     );
