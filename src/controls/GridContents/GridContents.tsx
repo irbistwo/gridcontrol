@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, {useState, useRef, useCallback, useEffect, useMemo, useLayoutEffect} from "react";
 import DataGrid from "./DataGrid";
 import Modal from './Modal/Modal';
@@ -7,18 +8,45 @@ import {sendPostDataLocation} from "../../service/serviceSend";
 import {guidsmall} from "../../service/formatutils";
 //import CruidButtinPanel from "./CruidButtinPanel.tsx";
 
+export interface  IParams{
+    name?:string;
+    t?:string;
+    v?:any
+}
 
-const GridContents =(props:any)=> {
-    const idtable=props.id;
+export interface Imaptopost {
+ table?:string;
+ execsql?:string;
+ sqlnumber?:number;
+ guid?:string;
+ task?:string;
+ where?:string[];
+ params?:IParams[]
+
+}
+
+interface IData {
+    id:string
+    caption:string;
+    initmaptopost:Imaptopost
+    staticinnerparams:IParams[];
+}
+interface IProp {
+    props:IData
+}
+
+const GridContents:React.FC<IProp> =({id,caption,initmaptopost,staticinnerparams}:IData)=> {
+    const idtable=id;
     // const [data, setData] = useState({...data0});
     const [data, setData] = useState({});
-    const [caption, setCaption] = useState(props.caption);
+    const [caption0, setCaption] = useState(caption);
     const [isLoaded, setIsLoaded] = useState(false);
     const [modalVisible, setmodalVisible] = useState(false);
     const [filterVisible, setfilterVisible] = useState(false);
     const [row,setRow]=useState({ID:0});
     const [selectedIndex,setselectedIndex]=useState(0);
    const[exectype,setExectype]=useState(2);
+   const[statemaptopost,setMaptopost]=useState<Imaptopost>(initmaptopost);
     const handleModal=(maptopost:any)=>{
         setIsLoaded(false);
         setmodalVisible(false);
@@ -33,7 +61,12 @@ const GridContents =(props:any)=> {
     const handleFilterModal=(maptopost:any)=>{
        // setIsLoaded(false);
         setfilterVisible(false);
+        maptopost.task="view";
 console.log("handleFilterModal",maptopost);
+ maptopost.params=[...maptopost.params,...staticinnerparams]
+       // maptopost.params.push(staticinnerparams);
+setMaptopost(maptopost);
+setIsLoaded(false);
         //  const i=locate(row.ID);
         //setselectedIndex(i);
         //  get_data();
@@ -72,53 +105,34 @@ console.log("handleFilterModal",maptopost);
 
         setfilterVisible(true);
     }
-    useEffect(()=>{prepareModalstyle()});
 
-    const prepareModalstyle=()=> {
-        const addstyle = (filename: string) => {
-
-            var styles = document.createElement('link');
-            styles.rel = 'stylesheet';
-            styles.type = 'text/css';
-            styles.media = 'screen';
-            // styles.href = '/css/cruid.css';
-            styles.href = filename;
-            document.getElementsByTagName('head')[0].appendChild(styles);
-        }
-
-        addstyle("/css/dbgridreach.css");
-        addstyle("/css/viewgrid.css");
-//addstyle('/css/cruid.css');
-        addstyle("/css/style-jtag.css");
-        addstyle("/css/stylecombo.css");
-        addstyle("/css/notif.css");
-
-
-    }
 
 
     const get_data=()=>{
         // console.log("newdatarow",data.rows);
         if(isLoaded) return;
         const id=row.ID;
-        let selindex=0
-        let maptopost={};
+        let selindex=0;
+        /*
+         let maptopost:Imaptopost={};
         let paramarray=[];
         // let wherearray=[];
         let wherearray=["name like :name||'%'"];
 
-        let paramid={};
+        let paramid:IParams={};
         paramid.name="NAME";
         paramid.t="string";
         paramid.v="К";
         paramarray.push(paramid);
         maptopost.params=paramarray;
         maptopost.where=wherearray;
-        maptopost.table="section";maptopost.sqlnumber=2;
+        maptopost.table="section";
+        maptopost.sqlnumber=2;
         maptopost.guid=guidsmall();
         maptopost.task="view";
+       */
         //console.log(maptopost);
-        sendPostDataLocation(maptopost,(error,result)=>{
+        sendPostDataLocation(statemaptopost,(error,result)=>{
             if(error) throw error;
             //  console.log(result);
             let jsonres=JSON.parse(result);

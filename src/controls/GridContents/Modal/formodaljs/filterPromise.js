@@ -43,6 +43,8 @@ export function  filterShowPromise(idfilter,guid) {
                 //console.log(event.keyCode);
                 if (event.keyCode === 27/*ESC*/) {
                     modal.style.display = "none";
+                   resolve(null);
+                    //reject();
                 }
                 if (event.keyCode === 13) {
                     let focusel = document.activeElement;

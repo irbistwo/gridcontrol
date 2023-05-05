@@ -6,7 +6,8 @@ import EmptyGrid from "./controls/GridContents/DataGrid/EmptyGrid";
 import {sendPostDataLocation} from "./service/serviceSend";
 import {guidsmall} from "./service/formatutils";
 import Modal from "./controls/GridContents/Modal/Modal";
-import GridContents from "./controls/GridContents/GridContents.tsx";
+// @ts-ignore
+import GridContents, {Imaptopost, IParams} from "./controls/GridContents/GridContents.tsx";
 const data0 = {
     caption: 'Basic DataGrid',
     width:800,
@@ -69,7 +70,54 @@ const data0 = {
 };
 
 const App =()=>{
-   return( <GridContents id={"goods"} caption={"Товары"} />)
+    useEffect(()=>{prepareModalstyle()});
+
+    const prepareModalstyle=()=> {
+        const addstyle = (filename: string) => {
+
+            var styles = document.createElement('link');
+            styles.rel = 'stylesheet';
+            styles.type = 'text/css';
+            styles.media = 'screen';
+            // styles.href = '/css/cruid.css';
+            styles.href = filename;
+            document.getElementsByTagName('head')[0].appendChild(styles);
+        }
+
+        addstyle("/css/dbgridreach.css");
+        addstyle("/css/viewgrid.css");
+//addstyle('/css/cruid.css');
+        addstyle("/css/style-jtag.css");
+        addstyle("/css/stylecombo.css");
+        addstyle("/css/notif.css");
+
+
+    }
+    let maptopost:Imaptopost = {};
+    let paramarray=[];
+    let paramarraystatic=[];
+    // let wherearray=[];
+    let wherearray=["name like :name||'%'"];
+
+    let paramid:IParams={};
+    paramid.name="NAME";
+    paramid.t="string";
+    paramid.v="К%";
+    paramarray.push(paramid);
+    paramarraystatic.push(paramid);
+    paramid={};
+    paramid.name="INDEF";
+    paramid.t="integer";
+    paramid.v=0;
+    paramarray.push(paramid);
+    paramarraystatic.push(paramid);
+    maptopost.params=paramarray;
+    maptopost.where=wherearray;
+    maptopost.table="section";
+    maptopost.sqlnumber=2;
+    maptopost.guid=guidsmall();
+    maptopost.task="view";
+   return( <GridContents id={"goods"} caption={"Товары"}  initmaptopost={maptopost} staticinnerparams={paramarraystatic}/>)
 }
 
 export default App;
